@@ -57,6 +57,7 @@ public class FoodBehavior : MonoBehaviour
         gameObject.GetComponent<BrothBuoyancy>().enabled = false;
         halo.enabled = false;
         foodState = -1;
+        //slider.transform.position = this.transform.position;
         slider.GetComponent<ProgressBar>().TotalCookingTime = 0f;
         slider.GetComponent<ProgressBar>().healthBar.maxValue = overcookedTime;
         
