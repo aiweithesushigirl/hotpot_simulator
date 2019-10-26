@@ -13,6 +13,7 @@ public class FoodBehavior : MonoBehaviour
 	public GameObject chopsticks = null;
     public GameObject gameController;
     public GameObject bowl;
+    public GameObject slider;
     public OvercookedDisplayer overcooked;
     
     public MeshCollider meshCollider;
@@ -56,7 +57,10 @@ public class FoodBehavior : MonoBehaviour
         gameObject.GetComponent<BrothBuoyancy>().enabled = false;
         halo.enabled = false;
         foodState = -1;
-	}
+        slider.GetComponent<ProgressBar>().TotalCookingTime = 0f;
+        slider.GetComponent<ProgressBar>().healthBar.maxValue = overcookedTime;
+        
+    }
 
     void Update()
     {
@@ -82,6 +86,7 @@ public class FoodBehavior : MonoBehaviour
 
             gameObject.GetComponent<BrothBuoyancy>().enabled = true;
             cookedFor += Time.deltaTime;
+            slider.GetComponent<ProgressBar>().TotalCookingTime += Time.deltaTime;
             foodState = 0;
             if (cookedFor >= optimalTime && cookedFor <= timeToCook)
             {
@@ -187,6 +192,7 @@ public class FoodBehavior : MonoBehaviour
 
     private void OnDestroy()
     {
+        Destroy(slider);
         if (overcooked != null)
         {
             overcooked.GetComponent<OvercookedDisplayer>().isOvercooked = false;
