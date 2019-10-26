@@ -240,9 +240,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4066605124996938693}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.24999997, y: 0.25000006, z: 0.066987306, w: 0.9330127}
   m_LocalPosition: {x: -1.4321067, y: 2.03, z: -1.58}
-  m_LocalScale: {x: 0.1, y: 4, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 20, z: 0.5}
   m_Children:
   - {fileID: 4066605124325086435}
   - {fileID: 4066605124868440039}
@@ -250,7 +250,7 @@ Transform:
   - {fileID: 4024801254716078477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: 30, z: 0}
 --- !u!54 &4066605124996924474
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -299,6 +299,8 @@ MonoBehaviour:
   foodObject: {fileID: 4692117799927876693, guid: 8369f35cbd41a4d8cae836488bb40528,
     type: 3}
   tip: {fileID: 4066605123990168197}
+  playerIndex: 0
+  point: 0
 --- !u!1001 &9153452940201017359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,16 +308,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4066605124996924473}
     m_Modifications:
-    - target: {fileID: 5250475443740096899, guid: e724bf870eef642cfbffcb735aa5e024,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250475443740096899, guid: e724bf870eef642cfbffcb735aa5e024,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5250475443740096898, guid: e724bf870eef642cfbffcb735aa5e024,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,6 +372,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250475443740096899, guid: e724bf870eef642cfbffcb735aa5e024,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250475443740096899, guid: e724bf870eef642cfbffcb735aa5e024,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5250475443740096903, guid: e724bf870eef642cfbffcb735aa5e024,
         type: 3}
