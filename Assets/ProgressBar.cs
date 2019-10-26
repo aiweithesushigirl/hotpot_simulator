@@ -9,6 +9,9 @@ public class ProgressBar : MonoBehaviour
     public float minTime;
     public float maxTime;
     public Slider healthBar;
+    public Image Fill;  // assign in the editor the "Fill"
+    public Color MinHealthColor = Color.green;
+    public Color MaxHealthColor = Color.red;
     private void Start()
     {
         minTime = 0f;
@@ -24,5 +27,6 @@ public class ProgressBar : MonoBehaviour
     {
         Debug.Log("aaaaaaaa" + healthBar.value);
         healthBar.value = TotalCookingTime;
+        Fill.color = Color.Lerp(MinHealthColor, MaxHealthColor, (float)healthBar.value / healthBar.maxValue);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using InControl;
 
 public class FoodBehavior : MonoBehaviour
@@ -57,7 +58,7 @@ public class FoodBehavior : MonoBehaviour
         gameObject.GetComponent<BrothBuoyancy>().enabled = false;
         halo.enabled = false;
         foodState = -1;
-        //slider.transform.position = this.transform.position;
+
         slider.GetComponent<ProgressBar>().TotalCookingTime = 0f;
         slider.GetComponent<ProgressBar>().healthBar.maxValue = overcookedTime;
         
@@ -66,6 +67,7 @@ public class FoodBehavior : MonoBehaviour
     void Update()
     {
         var inputDevice = InputManager.ActiveDevice;
+
         if (grabbed && inputDevice.RightTrigger)
         {
 
@@ -84,7 +86,8 @@ public class FoodBehavior : MonoBehaviour
 
         if (isCooking)
         {
-
+            Vector3 sliderPos = new Vector3(transform.position.x, transform.position.y + 2, 0);
+            slider.transform.position = sliderPos;
             gameObject.GetComponent<BrothBuoyancy>().enabled = true;
             cookedFor += Time.deltaTime;
             slider.GetComponent<ProgressBar>().TotalCookingTime += Time.deltaTime;
@@ -105,6 +108,8 @@ public class FoodBehavior : MonoBehaviour
                 {
                     gameObject.GetComponent<Renderer>().materials[z].color = foodColorOvercook[foodName];
                 }
+                
+                //slider.GetComponent<ProgressBar>().healthBar.transition.;
                 gameObject.GetComponent<BrothBuoyancy>().density = 500f;
                 foodState = 2;
             }
@@ -116,7 +121,8 @@ public class FoodBehavior : MonoBehaviour
                     gameObject.GetComponent<Renderer>().materials[z].color = Color.black;
                 }
                 Debug.Log("color" + gameObject.GetComponent<Renderer>().material.color);
-                overcooked.GetComponent<OvercookedDisplayer>().isOvercooked = true;               
+                overcooked.GetComponent<OvercookedDisplayer>().isOvercooked = true;
+                Destroy(slider);
                 gameController.GetComponent<GameController>().DeductPoint(1, controlledBy);
                 StartCoroutine(beforeDestroy());
             }
@@ -193,7 +199,7 @@ public class FoodBehavior : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(slider);
+        
         if (overcooked != null)
         {
             overcooked.GetComponent<OvercookedDisplayer>().isOvercooked = false;
