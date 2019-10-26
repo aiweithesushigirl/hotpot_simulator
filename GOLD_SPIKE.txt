@@ -1,0 +1,1 @@
+This is a timed hotpot simulator game where users use the arrow key controls to maximize points by cooking food in a hotpot. To optimaze gain, users have to watch the time.
