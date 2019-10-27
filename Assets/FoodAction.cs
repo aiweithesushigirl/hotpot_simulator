@@ -12,11 +12,11 @@ public class FoodAction : GeneralAction
 
     public override void doActionOne()
     {
-        fb.grabbed = true;
+        fb.grabbed = !fb.grabbed;
     }
 
     public override void doActionTwo()
     {
-        fb.grabbed = false;
+        
     }
 }

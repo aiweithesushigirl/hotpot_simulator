@@ -75,5 +75,7 @@ public class Chopsticks : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         hasHit = true;
+
     }
+
 }
