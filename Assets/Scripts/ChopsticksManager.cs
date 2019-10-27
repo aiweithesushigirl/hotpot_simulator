@@ -9,12 +9,15 @@ public class ChopsticksManager : MonoBehaviour
 	public GameObject playerPrefab;
     public GameObject shadow;
     public Text text1;
-    const int maxPlayers = 2;
+    const int maxPlayers = 4;
+    private int idx; 
 
 	List<Vector3> playerPositions = new List<Vector3>() {
-		new Vector3( 2, 2, -1.5f ),
-		new Vector3( -2.9f, 2, -1.5f )
-	};
+		new Vector3( -30, 20, -30 ),
+		new Vector3( 30, 20, -30),
+        new Vector3(  -30, 20, 30 ),
+        new Vector3(  30, 20, 30 )
+    };
 
 	List<Chopsticks> players = new List<Chopsticks>(maxPlayers);
 
@@ -23,6 +26,7 @@ public class ChopsticksManager : MonoBehaviour
 	void Start()
 	{
 		InputManager.OnDeviceDetached += OnDeviceDetached;
+        idx = 0;
 	}
 
 
@@ -85,10 +89,12 @@ public class ChopsticksManager : MonoBehaviour
 		if (players.Count < maxPlayers)
 		{
 			// Pop a position off the list. We'll add it back if the player is removed.
+            
 			var playerPosition = playerPositions[0];
 			playerPositions.RemoveAt(0);
-
+            
 			var gameObject = (GameObject)Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+            ChangeRotation(gameObject);
             //var shadowObject = (GameObject)Instantiate(shadow, playerPosition, Quaternion.identity);
 
             gameObject.GetComponent<Chopsticks>().playerIndex = players.Count + 1;
@@ -97,13 +103,32 @@ public class ChopsticksManager : MonoBehaviour
             //sha.GetComponent<ShadowController>();
             player.Device = inputDevice;
 			players.Add(player);
-
+            idx++;
 			return player;
 		}
 
 		return null;
 	}
 
+    void ChangeRotation(GameObject Chopstick)
+    {
+        if(idx == 0)
+        {
+            Chopstick.transform.eulerAngles = new Vector3(-30, 30, 0);
+        }
+        else if(idx == 1)
+        {
+            Chopstick.transform.eulerAngles = new Vector3(-30, -30, 0);
+        }
+        else if(idx == 2)
+        {
+            Chopstick.transform.eulerAngles = new Vector3(30, 30, 0);
+        }
+        else
+        {
+            Chopstick.transform.eulerAngles = new Vector3(30, -30, 0);
+        }
+    }
 
 	void RemovePlayer(Chopsticks player)
 	{

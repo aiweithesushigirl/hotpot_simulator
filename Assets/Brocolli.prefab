@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3762606086101994797}
   - component: {fileID: 3762606086101994799}
   - component: {fileID: 3762606086101994798}
+  - component: {fileID: -761540500146711874}
   m_Layer: 0
   m_Name: Brocolli
   m_TagString: food
@@ -127,6 +128,7 @@ MonoBehaviour:
   timeToCook: 30
   optimalTime: 15
   overcookedTime: 35
+  grabbed: 0
   chopsticks: {fileID: 542981454724603133, guid: a76e68f4eec5f4e4ca88bbc6eefa0078,
     type: 3}
   gameController: {fileID: 4895195642196723913, guid: 7812e22a9e6c64d5c9f52cdeed77c66a,
@@ -134,8 +136,11 @@ MonoBehaviour:
   bowl: {fileID: 2297440063962611957, guid: b02db341e13ee4c3cb9c2d5174150f79, type: 3}
   overcooked: {fileID: 7339473813976801666, guid: 652903fadc44b4003a1a1aadb5ce7eae,
     type: 3}
-  boxCollider: {fileID: 3762606086101994798}
+  meshCollider: {fileID: 0}
+  halo: {fileID: 0}
   isCooking: 0
+  foodName: 
+  controlledBy: 0
 --- !u!65 &3762606086101994798
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -149,3 +154,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.755473, y: 2.5735571, z: 1.60893}
   m_Center: {x: -0.01979381, y: -0.088320255, z: -0.5647812}
+--- !u!114 &-761540500146711874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762606086101994786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa79144e1fc6470488a240a2bb125993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

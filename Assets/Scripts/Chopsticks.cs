@@ -11,16 +11,21 @@ public class Chopsticks : MonoBehaviour
     public GameObject gameController;
     public GameObject foodObject;
     public GameObject tip;
+    public Transform top;
+    public float UpSpeed;
     
     public InputDevice Device = InputManager.ActiveDevice;
     private Rigidbody rb;
     public int playerIndex;
     public int point;
+    private bool goingDown;
+    private bool hasHit;
 
     void Start()
     {
 		rb = GetComponent<Rigidbody>();
-        
+        goingDown = false;
+        hasHit = false;
     }
 
     void Update()
@@ -29,21 +34,46 @@ public class Chopsticks : MonoBehaviour
         {
             bool down = Device.RightStickDown;
             bool up = Device.RightStickUp;
-            Vector3 movement = new Vector3(Device.LeftStickX.Value, (down ? -1 : 0) + (up ? 1 : 0), Device.LeftStickY.Value);
+            Vector3 movement = new Vector3(Device.LeftStickX.Value, 0, Device.LeftStickY.Value);
             rb.velocity = movementSpeed * movement;
+            if (Device.RightTrigger && !goingDown)
+            {
+                Debug.Log("Pushed down");
+                goingDown = true;
+                StartCoroutine(goDown());
+                
+            }
+        }      
+    }
+
+    IEnumerator goDown()
+    {
+        while (!hasHit)
+        {
+            rb.AddForce(Vector3.down * 1000000);
+            yield return null;
         }
-        //temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray))
-        //this.transform.position = Camera.main.ScreenToWorldPoint(temp);
-        //rb.velocity = movementSpeed * movement;
 
+        Vector3 start = transform.position;
+        Vector3 dest = transform.position;
+        dest.y = 20;
+        float totalDist = Mathf.Abs(20 - start.y);
+        float startTime = Time.time;
+        while(transform.position.y != 20)
+        {
+            float distCovered = (Time.time - startTime) * UpSpeed;
+            float fraction = distCovered / totalDist;
+            transform.position = Vector3.Lerp(start, dest, fraction);
+            yield return null;
+        }
+        
+        transform.position = dest;
+        goingDown = false;
+        hasHit = false;
+    }
 
-        //float move_x = Input.GetAxis("Horizontal");
-        //float move_y = Input.GetAxis("Vertical");
-        //      Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //      Vector3 movement = new Vector3(mousePosition.x, mousePosition.y, (down ? -1 : 0) + (up ? 1 : 0));
-        //      //Input.mousePosition;
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        hasHit = true;
     }
 }

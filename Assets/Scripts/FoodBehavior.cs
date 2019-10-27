@@ -8,7 +8,7 @@ public class FoodBehavior : MonoBehaviour
 	public float timeToCook = 30.0f;
 	public float optimalTime = 15.0f;
 	public float overcookedTime = 35.0f;
-	bool grabbed = false;
+	public bool grabbed = false;
     private bool alreadyAdded = false;
 	public GameObject chopsticks = null;
     public GameObject gameController;
@@ -193,4 +193,5 @@ public class FoodBehavior : MonoBehaviour
         }
         
     }
+    
 }
